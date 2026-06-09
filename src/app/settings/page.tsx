@@ -40,7 +40,7 @@ export default async function SettingsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Botcake API (Active)</CardTitle>
+            <CardTitle className="text-lg">Botcake API — PyX Solutions CRM</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-sm">
             <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ export default async function SettingsPage() {
               <p className="font-medium">Sample JSON body</p>
               <pre className="overflow-x-auto font-mono text-xs whitespace-pre-wrap">{`{
   "name": "{{user_full_name}}",
-  "contact": "{{contact}}",
+  "phone": "{{phone}}",
   "email": "{{email}}",
   "company": "{{company}}",
   "project_type": "{{proj_type}}",
@@ -121,4 +121,4 @@ export default async function SettingsPage() {
     </>
   );
 }
-
+

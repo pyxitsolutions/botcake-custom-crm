@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Droplets } from "lucide-react";
+import { Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -44,15 +44,15 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary">
-            <Droplets className="h-8 w-8 text-primary-foreground" />
+            <Layers className="h-8 w-8 text-primary-foreground" />
           </div>
-          <CardTitle className="text-2xl">WaterTech PH</CardTitle>
+          <CardTitle className="text-2xl">PyX Solutions CRM</CardTitle>
           <CardDescription>
-            Sign in to access the Lead Management System
+            Sign in to manage your leads and customers
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -62,7 +62,7 @@ export function LoginForm() {
               <Input
                 id="email"
                 type="email"
-                placeholder="you@watertech.ph"
+                placeholder="you@pyxsolutions.com"
                 {...register("email")}
               />
               {errors.email && (

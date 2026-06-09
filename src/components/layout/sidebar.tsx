@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Droplets,
+  Layers,
   LayoutDashboard,
   Users,
   FileText,
@@ -34,11 +34,11 @@ export function Sidebar() {
     <>
       <div className="flex items-center gap-3 px-6 py-6">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-          <Droplets className="h-6 w-6 text-primary-foreground" />
+          <Layers className="h-6 w-6 text-primary-foreground" />
         </div>
         <div>
-          <h1 className="text-lg font-bold text-sidebar-foreground">WaterTech PH</h1>
-          <p className="text-xs text-sidebar-muted">Lead Management</p>
+          <h1 className="text-lg font-bold text-sidebar-foreground">PyX Solutions</h1>
+          <p className="text-xs text-sidebar-muted">CRM</p>
         </div>
       </div>
 

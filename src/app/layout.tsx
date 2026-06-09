@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "WaterTech PH — Lead Management",
-  description: "CRM dashboard for managing water treatment leads from Botcake",
+  title: "PyX Solutions CRM",
+  description: "Lead management CRM for PyX Solutions — powered by Botcake",
 };
 
 export default function RootLayout({
