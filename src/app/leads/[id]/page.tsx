@@ -13,6 +13,8 @@ interface LeadDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
   const { id } = await params;
   const [lead, notes] = await Promise.all([

@@ -10,7 +10,6 @@ import {
   updateLeadStatusSchema,
 } from "@/lib/validations";
 import { isGoogleSheetsSyncEnabled } from "@/lib/config";
-import { syncLeadsFromGoogleSheet } from "@/lib/sync-sheets";
 import type {
   Customer,
   DashboardStats,
@@ -296,6 +295,7 @@ export async function syncSheetsAction(): Promise<
   }
 
   try {
+    const { syncLeadsFromGoogleSheet } = await import("@/lib/sync-sheets");
     const result = await syncLeadsFromGoogleSheet();
 
     revalidatePath("/dashboard");

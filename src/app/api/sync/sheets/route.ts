@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { isGoogleSheetsSyncEnabled } from "@/lib/config";
-import { syncLeadsFromGoogleSheet } from "@/lib/sync-sheets";
 
 export async function POST(request: Request) {
   if (!isGoogleSheetsSyncEnabled()) {
@@ -25,6 +24,7 @@ export async function POST(request: Request) {
       }
     }
 
+    const { syncLeadsFromGoogleSheet } = await import("@/lib/sync-sheets");
     const result = await syncLeadsFromGoogleSheet();
 
     return NextResponse.json(result, {

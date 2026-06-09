@@ -3,6 +3,8 @@ import { EditHintBanner } from "@/components/leads/edit-hint-banner";
 import { LeadsTable } from "@/components/leads/leads-table";
 import { getLeads } from "@/lib/actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function LeadsPage() {
   const leads = await getLeads();
 

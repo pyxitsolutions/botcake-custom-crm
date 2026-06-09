@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getAllNotes } from "@/lib/actions";
 import { formatDate } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 export default async function NotesPage() {
   const notes = await getAllNotes();
 
