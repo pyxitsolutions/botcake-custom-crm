@@ -7,6 +7,8 @@ import { createClient } from "@/lib/supabase/server";
 import {
   addNoteSchema,
   loginSchema,
+  updateCustomerSchema,
+  updateLeadSchema,
   updateLeadStatusSchema,
 } from "@/lib/validations";
 import { isGoogleSheetsSyncEnabled } from "@/lib/config";
@@ -243,6 +245,92 @@ export async function updateLeadStatusAction(formData: FormData) {
 
   revalidatePath("/leads");
   revalidatePath(`/leads/${parsed.data.leadId}`);
+  revalidatePath("/dashboard");
+
+  return { success: true };
+}
+
+export async function updateCustomerAction(formData: FormData) {
+  const auth = await requireAuthenticatedUser();
+  if ("error" in auth) return auth;
+
+  const raw = {
+    customerId: formData.get("customerId") as string,
+    name: formData.get("name") as string,
+    phone: formData.get("phone") as string,
+    email: formData.get("email") as string,
+    company: formData.get("company") as string,
+  };
+
+  const parsed = updateCustomerSchema.safeParse(raw);
+  if (!parsed.success) {
+    return { error: parsed.error.errors[0]?.message ?? "Invalid input" };
+  }
+
+  const normalizedPhone = parsed.data.phone.replace(/\s/g, "");
+  const normalizedEmail = parsed.data.email?.trim() || null;
+  const normalizedCompany = parsed.data.company?.trim() || null;
+
+  const admin = createAdminClient();
+  const { error } = await admin
+    .from("customers")
+    .update({
+      name: parsed.data.name.trim(),
+      phone: normalizedPhone,
+      email: normalizedEmail,
+      company: normalizedCompany,
+    })
+    .eq("id", parsed.data.customerId);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/customers");
+  revalidatePath(`/customers/${parsed.data.customerId}`);
+  revalidatePath("/leads");
+  revalidatePath("/dashboard");
+
+  return { success: true };
+}
+
+export async function updateLeadAction(formData: FormData) {
+  const auth = await requireAuthenticatedUser();
+  if ("error" in auth) return auth;
+
+  const raw = {
+    leadId: formData.get("leadId") as string,
+    project_type: formData.get("project_type") as string,
+    project_goal: formData.get("project_goal") as string,
+    budget: formData.get("budget") as string,
+    timeline: formData.get("timeline") as string,
+    source: formData.get("source") as string,
+  };
+
+  const parsed = updateLeadSchema.safeParse(raw);
+  if (!parsed.success) {
+    return { error: parsed.error.errors[0]?.message ?? "Invalid input" };
+  }
+
+  const admin = createAdminClient();
+  const { error } = await admin
+    .from("leads")
+    .update({
+      project_type: parsed.data.project_type.trim(),
+      project_goal: parsed.data.project_goal.trim(),
+      budget: parsed.data.budget?.trim() || null,
+      timeline: parsed.data.timeline?.trim() || null,
+      source: parsed.data.source?.trim() || "botcake",
+    })
+    .eq("id", parsed.data.leadId);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/leads");
+  revalidatePath(`/leads/${parsed.data.leadId}`);
+  revalidatePath("/customers");
   revalidatePath("/dashboard");
 
   return { success: true };

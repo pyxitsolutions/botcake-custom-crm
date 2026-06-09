@@ -12,7 +12,7 @@ export default async function LeadsPage() {
     <>
       <Header
         title="Leads"
-        description="Click status dropdowns to update leads — not view-only"
+        description="Edit status inline or open a lead to update full details"
       />
       <div className="p-4 sm:p-8">
         <EditHintBanner />

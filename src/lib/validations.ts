@@ -52,6 +52,31 @@ export const addNoteSchema = z.object({
 
 export type AddNoteData = z.infer<typeof addNoteSchema>;
 
+export const updateCustomerSchema = z.object({
+  customerId: z.string().uuid(),
+  name: z.string().min(1, "Name is required").max(200),
+  phone: z
+    .string()
+    .min(10, "Phone must be at least 10 digits")
+    .max(15, "Phone is too long")
+    .regex(/^[\d\s+\-()]+$/, "Invalid phone number format"),
+  email: z.string().email("Invalid email").optional().or(z.literal("")),
+  company: z.string().max(200).optional().or(z.literal("")),
+});
+
+export type UpdateCustomerData = z.infer<typeof updateCustomerSchema>;
+
+export const updateLeadSchema = z.object({
+  leadId: z.string().uuid(),
+  project_type: z.string().min(1, "Project type is required").max(100),
+  project_goal: z.string().min(1, "Project goal is required").max(500),
+  budget: z.string().max(100).optional().or(z.literal("")),
+  timeline: z.string().max(100).optional().or(z.literal("")),
+  source: z.string().max(50).optional(),
+});
+
+export type UpdateLeadData = z.infer<typeof updateLeadSchema>;
+
 export const sheetRowSchema = z.object({
   name: z.string().min(1, "Name is required"),
   phone: z
